@@ -15,7 +15,7 @@ on:
 
 jobs:
   autotune-tests:
-    name: AutoTune tests (${{ matrix.os }})
+    name: Adaptive tests (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -30,5 +30,7 @@ jobs:
         run: python tools/986-adaptive/test_adaptive986.py
       - name: Smoke test hardware detection
         run: python tools/986-adaptive/adaptive986.py detect
-      - name: Smoke test balanced tune
+      - name: Smoke test bootstrap tune
         run: python tools/986-adaptive/adaptive986.py tune --profile balanced --model-gib 4 --format args
+      - name: Smoke test anonymous fingerprint
+        run: python tools/986-adaptive/bench986.py fingerprint
