@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 import importlib.util
 import pathlib
+import sys
 import unittest
 
 MODULE_PATH = pathlib.Path(__file__).with_name("adaptive986.py")
 spec = importlib.util.spec_from_file_location("adaptive986", MODULE_PATH)
-adaptive986 = importlib.util.module_from_spec(spec)
 assert spec and spec.loader
+adaptive986 = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = adaptive986
 spec.loader.exec_module(adaptive986)
 
 
